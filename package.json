@@ -1,0 +1,44 @@
+{
+  "name": "koa-chat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "__tests__"
+  },
+  "scripts": {
+    "nodemon": "nodemon",
+    "start": "nodemon --inspect index.js",
+    "build": "node NODE_ENV=production index.js",
+    "eslint": "eslint",
+    "test": "mocha $(find __tests__ -name '*.js')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravbetsky/koa-chat.git"
+  },
+  "author": "Artem Ravbetsky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ravbetsky/koa-chat/issues"
+  },
+  "homepage": "https://github.com/ravbetsky/koa-chat#readme",
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-google": "*"
+  },
+  "dependencies": {
+    "config": "^2.0.1",
+    "fs-extra": "^7.0.0",
+    "koa": "^2.6.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-favicon": "^2.0.1",
+    "koa-logger": "^3.2.0",
+    "koa-passport": "^4.1.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.9.0",
+    "koa-static": "^5.0.0",
+    "mocha": "^5.2.0",
+    "pug": "^2.0.3"
+  }
+}
