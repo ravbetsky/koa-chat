@@ -1,5 +1,9 @@
 html
   head
     title Amazing chat
+    link(rel='stylesheet' href='css/bootstrap.min.css')
   body
-    block content
+    div(class="container")
+      include messages
+    
+      block content
