@@ -1,3 +1,4 @@
 const logger = require('koa-logger');
 
-module.exports = logger();
+module.exports = (app) => logger();
+
