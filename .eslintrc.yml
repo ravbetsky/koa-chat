@@ -3,6 +3,10 @@
 extends:
   - google
 
+rules:
+  indent: [2, 2]
+  object-curly-spacing: ["error", "always"]
+
 parserOptions:
   ecmaVersion: 2017
 
