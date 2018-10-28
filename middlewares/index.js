@@ -6,6 +6,7 @@ const templates = require('./templates');
 const session = require('./session');
 const bodyParser = require('./bodyparser');
 const passport = require('./passport');
+const flash = require('./flash');
 
 module.exports = [
   favicon,
@@ -16,4 +17,5 @@ module.exports = [
   session,
   bodyParser,
   passport,
+  flash,
 ];

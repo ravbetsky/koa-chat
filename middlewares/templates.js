@@ -4,8 +4,12 @@ const config = require('config');
 
 module.exports = (app) => async (ctx, next) => {
   ctx.locals = {
-    get messages() {
-      return ['Test alert'];
+    get user() {
+      return ctx.state.user; // passport sets ctx
+    },
+
+    get flash() {
+      return ctx.getFlashMessages();
     },
   };
 
