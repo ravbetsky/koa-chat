@@ -8,9 +8,13 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light
           a#navbarDropdown.nav-link.dropdown-toggle(href='#' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false')
             | #{user.displayName}
           .dropdown-menu(aria-labelledby='navbarDropdown')
+            a.dropdown-item(href='#') Create a room
             a.dropdown-item(href='#') Settings
             .dropdown-divider
             a.dropdown-item(href='/logout') Logout
       else
+        li.nav-item.dropdown
+          a.dropdown-item(href='/login') Sign In
+        .divider
         li.nav-item.dropdown
           a.dropdown-item(href='/register') Sign Up

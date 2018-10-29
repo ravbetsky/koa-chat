@@ -7,7 +7,9 @@ module.exports = (app) => async (ctx, next) => {
     get user() {
       return ctx.state.user; // passport sets ctx
     },
-
+    get rooms() {
+      return ctx.getUserRooms;
+    },
     get flash() {
       return ctx.getFlashMessages();
     },

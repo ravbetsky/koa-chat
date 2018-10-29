@@ -1,3 +1,4 @@
+require('./Room');
 const mongoose = require('../libs/mongoose');
 const crypto = require('crypto');
 const config = require('config');
@@ -36,6 +37,7 @@ const userSchema = new mongoose.Schema({
     id: String,
     profile: {},
   }],
+  rooms: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Room' }],
 }, {
   timestamps: true,
 });

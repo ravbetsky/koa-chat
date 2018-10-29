@@ -2,6 +2,7 @@ const config = require('config');
 const _ = require('lodash');
 const uuid4 = require('uuid4');
 const User = require('../models/User');
+const Room = require('../models/Room');
 const sendMail = require('../libs/sendMail');
 
 module.exports.get = async (ctx) => {
@@ -28,13 +29,16 @@ module.exports.post = async (ctx) => {
   }
 
   try {
-    await User.create({
+    const user = await User.create({
       email,
       displayName,
       password,
       verifiedEmail: false,
       verifyEmailToken,
     });
+    const generalRoom = await Room.findOne({ name: 'general' });
+    user.rooms.push(generalRoom._id);
+    await user.save();
   } catch (e) {
     if (e.name === 'ValidationError') {
       const errorMessages = _.keys(e.errors)

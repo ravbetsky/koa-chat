@@ -11,6 +11,7 @@ const router = new Router();
 
 router.get('/', require('./routes/homepage').get);
 router.post('/login', require('./routes/login').post);
+router.get('/login', require('./routes/login').get);
 router.get('/logout', require('./routes/logout').get);
 router.get('/register', require('./routes/register').get);
 router.post('/register', require('./routes/register').post);

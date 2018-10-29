@@ -7,6 +7,7 @@ const session = require('./session');
 const bodyParser = require('./bodyparser');
 const passport = require('./passport');
 const flash = require('./flash');
+const rooms = require('./rooms');
 
 module.exports = [
   favicon,
@@ -18,4 +19,5 @@ module.exports = [
   bodyParser,
   passport,
   flash,
+  rooms,
 ];
