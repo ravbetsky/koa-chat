@@ -21,6 +21,11 @@ const userSchema = new mongoose.Schema({
     required: 'У пользователя должно быть имя',
     unique: 'Такое имя уже существует',
   },
+  verifiedEmail: Boolean,
+  verifyEmailToken: {
+    type: String,
+    unique: true,
+  },
   passwordHash: {
     type: String,
   },

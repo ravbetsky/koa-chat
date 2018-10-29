@@ -7,6 +7,7 @@ module.exports = {
   bootstrapRoot: path.join(process.cwd(), 'node_modules/bootstrap/dist'),
   app: {
     port: 3000,
+    host: 'http:/localhost',
   },
   mongodb: {
     uri: 'mongodb://localhost/chat_app',
@@ -16,6 +17,20 @@ module.exports = {
     hash: {
       length: 128,
       iterations: 10,
+    },
+  },
+  mailer: {
+    gmail: {
+      user: 'test.chat.app73',
+      password: 'testchatapp',
+    },
+    senders: {
+      // transactional emails, register/forgot pass etc
+      default: {
+        fromEmail: 'info@amazingchat.com',
+        fromName: 'Amazing Chat Team',
+        signature: '<em>With regards</em>',
+      },
     },
   },
 };
