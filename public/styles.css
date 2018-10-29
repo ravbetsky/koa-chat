@@ -1,0 +1,23 @@
+.jumbotron.login {
+  width: 26rem;
+  margin: 60px auto 0;
+  padding: 2rem;
+}
+
+.jumbotron.login > a {
+  width: 100%;
+}
+
+.jumbotron.register {
+  width: 36rem;
+  margin: 60px auto 0;
+  padding: 2rem;
+}
+
+.jumbotron.register > a {
+  width: 100%;
+}
+
+body > .container-fluid {
+  margin-top: 15px;
+}

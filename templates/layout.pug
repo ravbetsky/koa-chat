@@ -2,10 +2,14 @@ html
   head
     title Amazing chat
     link(rel='stylesheet' href='css/bootstrap.min.css')
+    link(rel='stylesheet' href='styles.css')
   body
-    div(class="container")
+    include header
+
+    div(class='container-fluid')
       include messages
-    
       block content
         
-  script(src="script.js")
+  script(src='jquery.min.js')
+  script(src='js/bootstrap.min.js')
+  script(src='script.js')
