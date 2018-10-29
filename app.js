@@ -17,6 +17,8 @@ router.get('/register', require('./routes/register').get);
 router.post('/register', require('./routes/register').post);
 router.get('/confirm/:verifyEmailToken', require('./routes/confirm').get);
 
+router.get('/room/:roomId', require('./routes/room').get);
+
 app.use(router.routes());
 
 module.exports = app;
