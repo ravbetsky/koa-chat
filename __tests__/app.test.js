@@ -1,9 +1,9 @@
-const request = require('request-promise').defaults({
-  resolveWithFullResponse: true,
-  simple: false,
-  json: true,
-});
-const _ = require('lodash');
+// const request = require('request-promise').defaults({
+//   resolveWithFullResponse: true,
+//   simple: false,
+//   json: true,
+// });
+// const _ = require('lodash');
 
 const assert = require('assert');
 const mongoose = require('../libs/mongoose');
@@ -11,7 +11,7 @@ const mongoose = require('../libs/mongoose');
 const User = require('../models/User');
 const app = require('../app');
 
-const getURL = (path) => `http://localhost:3000${path}`;
+// const getURL = (path) => `http://localhost:3000${path}`;
 
 describe('Server tests', () => {
   let server;
@@ -26,7 +26,6 @@ describe('Server tests', () => {
   });
 
   describe('User REST API', () => {
-    let existingUser;
     const existingUserData = {
       email: 'john@test.ru',
       displayName: 'John',
@@ -36,7 +35,7 @@ describe('Server tests', () => {
     beforeEach(async function() {
       // load fixtures
       await User.remove({});
-      existingUser = await User.create(existingUserData);
+      await User.create(existingUserData);
     });
 
     it('/login with existing', async () => {
