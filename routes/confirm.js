@@ -5,8 +5,6 @@ module.exports.get = async (ctx) => {
     verifyEmailToken: ctx.params.verifyEmailToken,
   });
 
-  console.log(user);
-
   if (!user) {
     ctx.throw(404, 'Ссылка недействительна');
   }
@@ -14,8 +12,6 @@ module.exports.get = async (ctx) => {
   if (!user.verifiedEmail) {
     user.verifiedEmail = true;
   }
-
-  user.verifyEmailToken = null;
 
   await user.save();
 

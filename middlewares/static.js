@@ -6,6 +6,7 @@ const staticPaths = [
   serve('public'),
   serve(config.get('bootstrapRoot')),
   serve(config.get('jqueryRoot')),
+  serve(config.get('socketRoot')),
 ];
 
 module.exports = (app) => compose(staticPaths);

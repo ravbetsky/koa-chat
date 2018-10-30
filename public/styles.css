@@ -36,11 +36,15 @@ body > .container-fluid > .row > .col-md-8 {
 }
 
 #chat {
-  height: calc(100% - 190px);
+  height: 100%;
   display: flex;
   flex-direction: column-reverse;
   overflow-y: scroll;
   margin-bottom: 20px;
+}
+
+#chat + form {
+  margin-bottom: 0;
 }
 
 ul.chat-list {

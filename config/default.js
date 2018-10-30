@@ -5,7 +5,11 @@ module.exports = {
   root: process.cwd(),
   templatesRoot: path.join(process.cwd(), 'templates'),
   bootstrapRoot: path.join(process.cwd(), 'node_modules/bootstrap/dist'),
+  socketRoot: path.join(process.cwd(), 'node_modules/socket.io-client/dist'),
   jqueryRoot: path.join(process.cwd(), 'node_modules/jquery/dist'),
+  redis: {
+    uri: 'redis://127.0.0.1:6379',
+  },
   app: {
     port: 3000,
     host: 'http:/localhost',
