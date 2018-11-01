@@ -1,6 +1,8 @@
 const Cookies = require('cookies');
 const config = require('config');
 const User = require('../models/User');
+const Room = require('../models/Room');
+const Message = require('../models/Message');
 
 const socketIO = require('socket.io');
 const redis = require('socket.io-redis');
@@ -41,6 +43,7 @@ module.exports = (server) => {
 
     socket.on('disconnect', async function() {
       try {
+        // Если быстро перезагружать страницу то не успевают удаляться айди сокетов
         const session = await sessionStore.get(sid);
         if (session) {
           session.socketIds.splice(session.socketIds.indexOf(socket.id), 1);
@@ -51,7 +54,7 @@ module.exports = (server) => {
       }
     });
 
-    next();
+    await next();
   });
 
   roomIO.on('connection', function(socket) {
@@ -62,12 +65,22 @@ module.exports = (server) => {
       activeRoomID = roomid;
     });
 
-    socket.on('message', function(msg) {
+    socket.on('message', async function(msg) {
       if (activeRoomID) {
-        roomIO.to(activeRoomID).emit('message', {
+        const data = {
           author: socket.user.displayName,
           content: msg,
-        });
+        };
+        try {
+          const message = await Message.create(data);
+          const currentRoom = await Room.findOne({ id: activeRoomID });
+          message.room = currentRoom._id;
+          await message.save();
+          const { author, content, createdAt } = message;
+          roomIO.to(activeRoomID).emit('message', { author, content, createdAt });
+        } catch (e) {
+          console.log(e);
+        }
       }
     });
   });
