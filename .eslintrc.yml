@@ -6,6 +6,16 @@ extends:
 rules:
   indent: [2, 2]
   object-curly-spacing: ["error", "always"]
+  require-jsdoc: ["error", {
+      "require": {
+        "FunctionDeclaration": false,
+        "MethodDefinition": false,
+        "ClassDeclaration": false,
+        "ArrowFunctionExpression": false,
+        "FunctionExpression": false
+      }
+    }    
+  ]
 
 parserOptions:
   ecmaVersion: 2017
