@@ -11,7 +11,7 @@ module.exports = {
     uri: 'redis://127.0.0.1:6379',
   },
   app: {
-    port: 3000,
+    port: process.env.PORT || 3000,
     host: 'http:/localhost',
   },
   mongodb: {

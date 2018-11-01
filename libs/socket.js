@@ -43,7 +43,8 @@ module.exports = (server) => {
 
     socket.on('disconnect', async function() {
       try {
-        // Если быстро перезагружать страницу то не успевают удаляться айди сокетов
+        // Если быстро перезагружать страницу
+        // то не успевают удаляться айди сокетов
         const session = await sessionStore.get(sid);
         if (session) {
           session.socketIds.splice(session.socketIds.indexOf(socket.id), 1);
@@ -77,7 +78,11 @@ module.exports = (server) => {
           message.room = currentRoom._id;
           await message.save();
           const { author, content, createdAt } = message;
-          roomIO.to(activeRoomID).emit('message', { author, content, createdAt });
+          roomIO.to(activeRoomID).emit('message', {
+            author,
+            content,
+            createdAt,
+          });
         } catch (e) {
           console.log(e);
         }
