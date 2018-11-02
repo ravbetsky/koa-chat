@@ -8,14 +8,14 @@ module.exports = {
   socketRoot: path.join(process.cwd(), 'node_modules/socket.io-client/dist'),
   jqueryRoot: path.join(process.cwd(), 'node_modules/jquery/dist'),
   redis: {
-    uri: 'redis://127.0.0.1:6379',
+    uri: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
   },
   app: {
     port: process.env.PORT || 3000,
     host: 'http:/localhost',
   },
   mongodb: {
-    uri: 'mongodb://localhost/chat_app',
+    uri: process.env.MONGODB_URI || 'mongodb://localhost/chat_app',
     debug: true,
   },
   crypto: {
