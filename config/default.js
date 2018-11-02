@@ -1,6 +1,7 @@
 const path = require('path');
 
-module.exports = {
+const PORT = process.env.PORT || 3000;
+const config = {
   secret: 'mysecret',
   root: process.cwd(),
   templatesRoot: path.join(process.cwd(), 'templates'),
@@ -8,14 +9,15 @@ module.exports = {
   socketRoot: path.join(process.cwd(), 'node_modules/socket.io-client/dist'),
   jqueryRoot: path.join(process.cwd(), 'node_modules/jquery/dist'),
   redis: {
-    uri: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
+    uri: 'redis://127.0.0.1:6379',
   },
   app: {
-    port: process.env.PORT || 3000,
-    host: process.env.HEROKU_URL || 'http:/localhost',
+    port: PORT,
+    host: 'http:/localhost',
+    uri: `http:/localhost:${PORT}`,
   },
   mongodb: {
-    uri: process.env.MONGODB_URI || 'mongodb://localhost/chat_app',
+    uri: 'mongodb://localhost/chat_app',
     debug: true,
   },
   crypto: {
@@ -39,3 +41,5 @@ module.exports = {
     },
   },
 };
+
+module.exports = config;
