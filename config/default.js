@@ -12,7 +12,7 @@ module.exports = {
   },
   app: {
     port: process.env.PORT || 3000,
-    host: 'http:/localhost',
+    host: process.env.HEROKU_URL || 'http:/localhost',
   },
   mongodb: {
     uri: process.env.MONGODB_URI || 'mongodb://localhost/chat_app',
