@@ -10,7 +10,6 @@
     "nodemon": "nodemon",
     "start": "nodemon --inspect index.js",
     "build": "node index.js",
-    "stage": "node NODE_ENV=heroku index.js",
     "eslint": "eslint",
     "test": "mocha $(find __tests__ -name '*.test.js')"
   },

@@ -4,9 +4,6 @@ start:
 build: 
 	npm run build
 
-stage: 
-	npm run stage
-
 dependencies:
 	npm install
 
