@@ -18,6 +18,9 @@ router.post('/register', require('./routes/register').post);
 router.get('/confirm/:verifyEmailToken', require('./routes/confirm').get);
 
 router.get('/room/:roomId', require('./routes/room').get);
+router.post('/createRoom', require('./routes/createRoom').post);
+router.get('/createRoom', require('./routes/createRoom').get);
+router.get('/deleteRoom/:roomId', require('./routes/deleteRoom').get);
 router.post('/messages', require('./routes/messages').post);
 
 app.use(router.routes());

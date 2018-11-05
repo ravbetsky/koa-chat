@@ -47,6 +47,10 @@ body > .container-fluid > .row > .col-md-8 {
   margin-bottom: 0;
 }
 
+a.list-group-item.active {
+  pointer-events: none;
+}
+
 ul.chat-list {
   padding-left: 0;
   list-style: none
@@ -68,4 +72,10 @@ ul.chat-list li span.author {
   margin: auto;
   height: 24px;
   text-align: center;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/fonts/glyphicons-halflings-regular.eot');
+  src: url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }

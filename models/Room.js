@@ -1,3 +1,4 @@
+require('./User');
 const mongoose = require('../libs/mongoose');
 const generate = require('nanoid/generate');
 
@@ -11,6 +12,11 @@ const roomSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+  isPrivate: Boolean,
+  admin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
 }, {
   timestamps: true,
 });
@@ -22,6 +28,7 @@ const createGeneral = async () => {
   if (!generalChannel) {
     return await Room.create({
       name: 'general',
+      isPrivate: false,
       id: generate('1234567890', 8) },
     );
   }

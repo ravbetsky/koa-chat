@@ -39,11 +39,32 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   function displayMessage(data) {
+    const { type } = data;
+    switch (type) {
+    case 'system':
+      return displaySystemMessage(data);
+    default:
+      return displayUserMessage(data);
+    };
+  }
+
+  function displayUserMessage(data) {
     const { author, content } = data;
     const li = `
       <li>
         <span class='author'>${author}</span>
         <span class='content'>${content}</span>
+      </li>
+    `;
+
+    chatList.append($(li));
+  };
+
+  function displaySystemMessage(data) {
+    const { content } = data;
+    const li = `
+      <li>
+        <span class='system'>${content}</span>
       </li>
     `;
 

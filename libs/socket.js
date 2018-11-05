@@ -62,7 +62,10 @@ module.exports = (server) => {
     let activeRoomID;
     socket.on('join', function(roomid) {
       socket.join(roomid);
-      roomIO.to(roomid).emit('testsocket', roomid);
+      roomIO.to(activeRoomID).emit('message', {
+        type: 'system',
+        content: `${socket.user.displayName} has joined to room`,
+      });
       activeRoomID = roomid;
     });
 
@@ -79,6 +82,7 @@ module.exports = (server) => {
           await message.save();
           const { author, content, createdAt } = message;
           roomIO.to(activeRoomID).emit('message', {
+            type: 'user',
             author,
             content,
             createdAt,

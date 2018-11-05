@@ -7,6 +7,7 @@ const staticPaths = [
   serve(config.get('bootstrapRoot')),
   serve(config.get('jqueryRoot')),
   serve(config.get('socketRoot')),
+  serve(config.get('fontAwesomeRoot')),
 ];
 
 module.exports = (app) => compose(staticPaths);

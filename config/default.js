@@ -5,6 +5,7 @@ module.exports = {
   root: process.cwd(),
   templatesRoot: path.join(process.cwd(), 'templates'),
   bootstrapRoot: path.join(process.cwd(), 'node_modules/bootstrap/dist'),
+  fontAwesomeRoot: path.join(process.cwd(), 'node_modules/font-awesome'),
   socketRoot: path.join(process.cwd(), 'node_modules/socket.io-client/dist'),
   jqueryRoot: path.join(process.cwd(), 'node_modules/jquery/dist'),
   redis: {
