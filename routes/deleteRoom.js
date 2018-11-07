@@ -10,20 +10,21 @@ module.exports.get = async (ctx, next) => {
   const roomObjectId = room._id;
   if (userId === roomAdminId) {
     try {
-      await room.remove();
       const roomMessages = await Message.find({ room: roomObjectId });
       await Promise.all(roomMessages.map((message) => {
         return message.remove();
       }));
-      const roomUsers = await User.find((user) => {
-        return user.rooms.includes(roomObjectId);
+      // Оптимизорвать запрос
+      const allUsers = await User.find({});
+      const roomUsers = allUsers.filter((user) => {
+        return user.rooms.some((room) =>
+          room._id.toString() === roomObjectId.toString()
+        );
       });
-      await Promises.all(roomUsers.map((user) => {
-        return user.rooms.splice(roomObjectId, 1);
+      await Promise.all(roomUsers.map((user) => {
+        return user.update({ '$pull': { rooms: { $in: roomObjectId } } });
       }));
-      await Promises.all(roomMessages.map(async (message) => {
-        return await message.remove();
-      }));
+      await room.remove();
       ctx.flash('success', 'Комната удалена');
       ctx.redirect('/');
     } catch (e) {
