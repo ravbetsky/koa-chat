@@ -8,7 +8,7 @@ const createGeneral = require('./general');
   try {
     await createGeneral();
     const generalRoom = await Room.findOne({ name: 'general' });
- 
+
     for (let i = 0; i < users.length; i++) {
       const user = await User.create(users[i]);
       user.rooms.push(generalRoom._id);
