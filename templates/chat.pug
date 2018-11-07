@@ -14,7 +14,7 @@
             a.dropdown-item.text-danger(href=deleteLink) Delete room
           else
             - var leaveLink = '/leaveRoom/' + activeRoomId
-            a.dropdown-item(href=leaveLink) Leave room
+            a#leaveLink.dropdown-item(href=leaveLink) Leave room
 
     
 #chat

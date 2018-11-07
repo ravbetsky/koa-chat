@@ -1,4 +1,5 @@
 const Room = require('../models/Room');
+const _ = require('lodash');
 const generate = require('nanoid/generate');
 
 module.exports.get = async (ctx, next) => {
@@ -26,8 +27,16 @@ module.exports.post = async (ctx, next) => {
       ctx.flash('success', `Комната  ${room.name} создана`);
       ctx.redirect(`/room/${roomId}`);
     } catch (e) {
-      console.log(e);
-      ctx.throw(500, 'Something went wrong');
+      if (e.name === 'ValidationError') {
+        const errorMessages = _.keys(e.errors)
+          .map((key) => `${key}: ${e.errors[key].message}`)
+          .join('<br>');
+
+        ctx.flash('error', errorMessages);
+        return ctx.redirect('/createRoom');
+      } else {
+        throw e;
+      }
     }
   } else {
     ctx.flash('error', 'Пожалуйста войдите или зарегистрируйсесь');

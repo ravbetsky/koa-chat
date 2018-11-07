@@ -69,6 +69,11 @@ module.exports = (server) => {
       activeRoomID = roomid;
     });
 
+    socket.on('leave', function(roomid) {
+      socket.leave(roomid);
+      socket.emit('disconnect');
+    });
+
     socket.on('message', async function(msg) {
       if (activeRoomID) {
         const data = {

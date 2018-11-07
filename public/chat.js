@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', () => {
     $('#message')[0].value = '';
   });
 
+  // Handler room leave
+  $('#leaveLink').on('click', (e) => {
+    socket.emit('leave', roomId);
+  });
+
   function loadMessages() {
     return fetch('/messages', {
       method: 'post',
