@@ -1,6 +1,6 @@
 const Room = require('../models/Room');
 const Message = require('../models/Message');
-const User = require('../models/User');
+const getRoomUsers = require('../utils/getRoomUsers');
 
 module.exports.get = async (ctx, next) => {
   const { roomId } = ctx.params;
@@ -14,13 +14,7 @@ module.exports.get = async (ctx, next) => {
       await Promise.all(roomMessages.map((message) => {
         return message.remove();
       }));
-      // Оптимизорвать запрос
-      const allUsers = await User.find({});
-      const roomUsers = allUsers.filter((user) => {
-        return user.rooms.some((room) =>
-          room._id.toString() === roomObjectId.toString()
-        );
-      });
+      const roomUsers = await getRoomUsers(roomObjectId);
       await Promise.all(roomUsers.map((user) => {
         return user.update({ '$pull': { rooms: { $in: roomObjectId } } });
       }));

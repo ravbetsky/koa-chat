@@ -2,7 +2,9 @@ require('./Room');
 const mongoose = require('../libs/mongoose');
 const crypto = require('crypto');
 const config = require('config');
+const _ = require('lodash');
 
+const publicFields = ['displayName', 'email'];
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -74,6 +76,10 @@ userSchema.methods.checkPassword = function(password) {
   ).toString('base64');
 
   return hash === this.passwordHash;
+};
+
+userSchema.methods.toJSON = function() {
+  return _.pick(this.toObject(), publicFields);
 };
 
 module.exports = mongoose.model('User', userSchema);

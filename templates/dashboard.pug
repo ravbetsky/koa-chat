@@ -18,3 +18,24 @@ block content
         include chat
       else
         div(class='start-messaging') Please select room to start messaging
+
+block modal
+  if activeRoomId
+    div(class='modal fade' id='roomUsers' tabindex='-1' role='dialog' arealabelledby='roomUsersTitle' aria-hidden='true')
+      div(class='modal-dialog' role='document')
+        div(class='modal-content')
+          div(class='modal-header')
+            h5(class='modal-title' id='roomUsersTitle') Room Members
+            button(type='button' class='close' data-dismiss='modal' aria-label='Close')
+              span(aria-hidden='true') &times;
+          div(class='modal-body')
+            ul
+              each roomUser in roomUsers
+                li
+                  span !{roomUser.displayName}
+                  if adminEmail
+                    if roomUser.email == adminEmail
+                      span.admin admin
+
+          div(class='modal-footer')
+            button(type='button' class='btn btn-secondary' data-dismiss='modal') Close

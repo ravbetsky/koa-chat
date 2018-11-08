@@ -1,7 +1,9 @@
 .room-settings
   - var userIcon = "<i class='fa fa-user-o'></i>"
-  - var membersCount = "<a href='#'>35</a>";
-  span.members !{userIcon} Members: !{membersCount}
+  - var membersCount = roomUsers.length;
+  span.members
+    span Members:
+    button(type='button' data-toggle='modal' data-target='#roomUsers') !{membersCount}
   unless isGeneral
     span.settings
       - var settingsIcon = "<i class='fa fa-cog'></i>"

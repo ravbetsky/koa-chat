@@ -74,6 +74,23 @@ ul.chat-list li span.author {
   text-align: center;
 }
 
+#roomUsers span.admin {
+  float: right;
+  color: gray;
+}
+
+#roomUsers ul {
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+#roomUsers li {
+  clear: right;
+  padding: 5px 0 7px;
+  margin-bottom: 0;
+}
+
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('/fonts/glyphicons-halflings-regular.eot');
