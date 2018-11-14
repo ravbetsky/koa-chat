@@ -63,6 +63,11 @@ ul.chat-list li span.author {
   display: block
 }
 
+ul.chat-list li span.system {
+  color: #b9b9b9;
+  font-style: italic;
+}
+
 .start-messaging {
   position: absolute;
   left: 0;

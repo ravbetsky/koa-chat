@@ -62,7 +62,7 @@ module.exports = (server) => {
     let activeRoomID;
     socket.on('join', function(roomid) {
       socket.join(roomid);
-      roomIO.to(activeRoomID).emit('message', {
+      roomIO.to(roomid).emit('message', {
         type: 'system',
         content: `${socket.user.displayName} has joined to room`,
       });
