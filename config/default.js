@@ -8,6 +8,9 @@ module.exports = {
   fontAwesomeRoot: path.join(process.cwd(), 'node_modules/font-awesome'),
   socketRoot: path.join(process.cwd(), 'node_modules/socket.io-client/dist'),
   jqueryRoot: path.join(process.cwd(), 'node_modules/jquery/dist'),
+  autocompleteRoot: path.join(process.cwd(),
+    'node_modules/devbridge-autocomplete/dist'),
+  underscoreRoot: path.join(process.cwd(), 'node_modules/underscore'),
   redis: {
     uri: 'redis://127.0.0.1:6379',
   },

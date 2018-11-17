@@ -1,7 +1,8 @@
 require('./User');
 const mongoose = require('../libs/mongoose');
-const generate = require('nanoid/generate');
+const _ = require('lodash');
 
+const publicFields = ['name', 'id'];
 const roomSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -21,20 +22,10 @@ const roomSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-const Room = mongoose.model('Room', roomSchema);
-
-const createGeneral = async () => {
-  const generalChannel = await Room.findOne({ name: 'general' });
-  if (!generalChannel) {
-    return await Room.create({
-      name: 'general',
-      isPrivate: false,
-      id: generate('1234567890', 8) },
-    );
-  }
-  return;
+roomSchema.methods.toJSON = function() {
+  return _.pick(this.toObject(), publicFields);
 };
 
-createGeneral();
+const Room = mongoose.model('Room', roomSchema);
 
 module.exports = Room;

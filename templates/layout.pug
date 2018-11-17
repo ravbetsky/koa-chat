@@ -5,6 +5,10 @@ html
     link(rel='stylesheet' href='/css/bootstrap.min.css')
     link(rel='stylesheet' href='/css/font-awesome.min.css')
     link(rel='stylesheet' href='/styles.css')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js')
+    script(src='/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
+    script(src='/underscore-min.js')
   body
     include header
 
@@ -14,8 +18,5 @@ html
         
   block modal
         
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js')
-  script(src='/jquery.min.js')
-  script(src='/js/bootstrap.min.js')
   script(src='/socket.io.js')
   script(src='/script.js')
