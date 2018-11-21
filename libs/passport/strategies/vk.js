@@ -1,17 +1,18 @@
-const GitHubStrategy = require('passport-github').Strategy;
+const VKStrategy = require('passport-vkontakte').Strategy;
 const config = require('config');
-const Room = require('../../../models/Room');
 const User = require('../../../models/User');
+const Room = require('../../../models/Room');
 
-// const CALLBACK_URL = `http://${config.get('app.host')}:${config.get('app.port')}/auth/github`;
+// const CALLBACK_URL = `http://${config.get('app.host')}:${config.get('app.port')}/oauth/vk`;
 
-module.exports = new GitHubStrategy({
-  clientID: config.get('providers.github.appId'),
-  clientSecret: config.get('providers.github.appSecret'),
-  callbackURL: 'http://localhost:3000/auth/github',
+module.exports = new VKStrategy({
+  clientID: config.get('providers.vk.appId'),
+  clientSecret: config.get('providers.vk.appSecret'),
+  callbackURL: 'http://localhost:3000/oauth/vk',
+  scope: ['email'],
   profileFields: ['email'],
-}, function(accessToken, refreshToken, profile, done) {
-  const email = profile.emails[0].value;
+}, function(accessToken, refreshToken, params, profile, done) {
+  const email = params.email;
 
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
@@ -20,7 +21,7 @@ module.exports = new GitHubStrategy({
       User.create({
         email,
         displayName: profile.displayName,
-        providers: [{ id: 'github', profile }],
+        providers: [{ id: 'vk', profile }],
       }, async (err, user) => {
         if (err) return done(err);
         const generalRoom = await Room.findOne({ name: 'general' });
@@ -29,10 +30,10 @@ module.exports = new GitHubStrategy({
         done(null, user, { message: 'Добро пожаловать!' });
       });
     } else {
-      if (user.providers.find((provider) => provider.id === 'github')) {
+      if (user.providers.find((provider) => provider.id === 'vk')) {
         done(null, user, { message: 'Добро пожаловать!' });
       } else {
-        user.providers.push({ id: 'github', profile });
+        user.providers.push({ id: 'vk', profile });
         user.save((err) => {
           if (err) return done(err);
 
@@ -41,4 +42,5 @@ module.exports = new GitHubStrategy({
       }
     }
   });
-});
+}
+);

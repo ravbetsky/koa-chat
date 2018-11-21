@@ -36,6 +36,13 @@ module.exports = {
         scope: ['email'],
       },
     },
+    vk: {
+      appId: '6759095',
+      appSecret: 'SNzsRcMySZNIfMZvwrhO',
+      passportOptions: {
+        scope: ['email'],
+      },
+    },
   },
   mailer: {
     gmail: {
