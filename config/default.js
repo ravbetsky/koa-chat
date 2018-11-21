@@ -28,6 +28,15 @@ module.exports = {
       iterations: 10,
     },
   },
+  providers: {
+    github: {
+      appId: 'd8b94a137cbce06a1f99',
+      appSecret: '3ceb26bf022ee962f710292b8f4290b2245b4a0d',
+      passportOptions: {
+        scope: ['email'],
+      },
+    },
+  },
   mailer: {
     gmail: {
       user: 'test.chat.app73',

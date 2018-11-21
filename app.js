@@ -1,5 +1,7 @@
 const Koa = require('koa');
 const app = new Koa();
+const config = require('config');
+const passport = require('passport');
 
 // Подключаем все необходимые мидлвары
 const compose = require('koa-compose');
@@ -25,6 +27,16 @@ router.get('/deleteRoom/:roomId', require('./routes/deleteRoom').get);
 router.get('/leaveRoom/:roomId', require('./routes/leaveRoom').get);
 router.get('/joinRoom/:roomId', require('./routes/joinRoom').get);
 router.post('/messages', require('./routes/messages').post);
+
+// Github passport auth
+const githubPassportOptions = config.get('providers.github.passportOptions');
+router.get('/login/github', passport.authenticate('github', githubPassportOptions));
+router.get('/auth/github', passport.authenticate('github', {
+  successRedirect: '/',
+  failureRedirect: '/',
+  successFlash: true,
+  failureFlash: true,
+}));
 
 app.use(router.routes());
 
