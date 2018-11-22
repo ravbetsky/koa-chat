@@ -3,12 +3,13 @@ const config = require('config');
 const User = require('../../../models/User');
 const Room = require('../../../models/Room');
 
-// const CALLBACK_URL = `http://${config.get('app.host')}:${config.get('app.port')}/oauth/vk`;
+const URI = `${config.get('app.host')}:${config.get('app.port')}`;
+const CALLBACK_URL = `${URI}/oauth/vk`;
 
 module.exports = new VKStrategy({
   clientID: config.get('providers.vk.appId'),
   clientSecret: config.get('providers.vk.appSecret'),
-  callbackURL: 'http://localhost:3000/oauth/vk',
+  callbackURL: CALLBACK_URL,
   scope: ['email'],
   profileFields: ['email'],
 }, function(accessToken, refreshToken, params, profile, done) {

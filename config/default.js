@@ -16,7 +16,7 @@ module.exports = {
   },
   app: {
     port: process.env.PORT || 3000,
-    host: 'http:/localhost',
+    host: 'http://localhost',
   },
   mongodb: {
     uri: 'mongodb://localhost/chat_app',

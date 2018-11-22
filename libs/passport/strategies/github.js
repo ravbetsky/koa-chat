@@ -3,12 +3,13 @@ const config = require('config');
 const Room = require('../../../models/Room');
 const User = require('../../../models/User');
 
-// const CALLBACK_URL = `http://${config.get('app.host')}:${config.get('app.port')}/auth/github`;
+const URI = `${config.get('app.host')}:${config.get('app.port')}`;
+const CALLBACK_URL = `${URI}/auth/github`;
 
 module.exports = new GitHubStrategy({
   clientID: config.get('providers.github.appId'),
   clientSecret: config.get('providers.github.appSecret'),
-  callbackURL: 'http://localhost:3000/auth/github',
+  callbackURL: CALLBACK_URL,
   profileFields: ['email'],
 }, function(accessToken, refreshToken, profile, done) {
   const email = profile.emails[0].value;
