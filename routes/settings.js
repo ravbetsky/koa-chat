@@ -1,4 +1,5 @@
 const profileRoute = require('./settings/profile');
+const passwordRoute = require('./settings/password');
 
 module.exports.get = async (ctx) => {
   const { settingsLink } = ctx.params;
@@ -11,14 +12,14 @@ module.exports.get = async (ctx) => {
 
   switch (settingsLink) {
   case 'password':
-    route = 'password';
+    route = passwordRoute;
     break;
   default:
     route = profileRoute;
     break;
   }
 
-  ctx.settingsLink = settingsLink;
+  ctx.locals = Object.assign({}, ctx.locals, { settingsLink });
 
   await route.get(ctx);
 };
