@@ -56,7 +56,17 @@ ul.chat-list {
   list-style: none
 }
 ul.chat-list li {
-  margin-bottom: 5px;
+  margin-bottom: 12px;
+  padding-left: 40px;
+  position: relative;
+}
+ul.chat-list li span.userpic {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  left: 0;
+  top: 3px;
+  background: lightgray;
 }
 ul.chat-list li span.author {
   font-weight: bold;

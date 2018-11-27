@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const { author, content } = data;
     const li = `
       <li>
+        <span class='userpic'><img src='https://via.placeholder.com/32.jpg'></span>
         <span class='author'>${author}</span>
         <span class='content'>${content}</span>
       </li>
