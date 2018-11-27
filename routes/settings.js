@@ -1,25 +1,39 @@
 const profileRoute = require('./settings/profile');
 const passwordRoute = require('./settings/password');
 
+const dispatch = (link) => {
+  switch (link) {
+  case 'password':
+    return passwordRoute;
+    break;
+  default:
+    return profileRoute;
+    break;
+  }
+};
+
 module.exports.get = async (ctx) => {
   const { settingsLink } = ctx.params;
-  let route = null;
 
   if (!ctx.isAuthenticated()) {
     ctx.redirect('/');
     return;
   }
 
-  switch (settingsLink) {
-  case 'password':
-    route = passwordRoute;
-    break;
-  default:
-    route = profileRoute;
-    break;
+  ctx.locals = Object.assign({}, ctx.locals, { settingsLink });
+
+  await dispatch(settingsLink).get(ctx);
+};
+
+module.exports.post = async (ctx) => {
+  const { settingsLink } = ctx.params;
+  console.log(settingsLink)
+  if (!ctx.isAuthenticated()) {
+    ctx.redirect('/');
+    return;
   }
 
   ctx.locals = Object.assign({}, ctx.locals, { settingsLink });
 
-  await route.get(ctx);
+  await dispatch(settingsLink).post(ctx);
 };

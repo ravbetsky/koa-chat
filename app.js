@@ -23,6 +23,7 @@ router.get('/confirm/:verifyEmailToken', require('./routes/confirm').get);
 // Profile settings
 router.get('/settings', (ctx) => ctx.redirect('/settings/profile'));
 router.get('/settings/:settingsLink', (require('./routes/settings').get));
+router.post('/settings/:settingsLink', (require('./routes/settings').post));
 
 // Room routes
 router.get('/room/:roomId', require('./routes/room').get);
