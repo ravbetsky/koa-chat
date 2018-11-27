@@ -20,6 +20,10 @@ router.get('/register', require('./routes/register').get);
 router.post('/register', require('./routes/register').post);
 router.get('/confirm/:verifyEmailToken', require('./routes/confirm').get);
 
+// Profile settings
+router.get('/settings', (ctx) => ctx.redirect('/settings/profile'));
+router.get('/settings/:settingsLink', (require('./routes/settings').get));
+
 // Room routes
 router.get('/room/:roomId', require('./routes/room').get);
 router.post('/createRoom', require('./routes/createRoom').post);
