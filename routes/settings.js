@@ -27,7 +27,7 @@ module.exports.get = async (ctx) => {
 
 module.exports.post = async (ctx) => {
   const { settingsLink } = ctx.params;
-  console.log(settingsLink)
+
   if (!ctx.isAuthenticated()) {
     ctx.redirect('/');
     return;
