@@ -54,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayUserMessage(data) {
-    const { author, content } = data;
+    const { author, content, avatar } = data;
     const li = `
       <li>
-        <span class='userpic'><img src='https://via.placeholder.com/32.jpg'></span>
+        <span class='userpic'><img src='${avatar}'></span>
         <span class='author'>${author}</span>
         <span class='content'>${content}</span>
       </li>

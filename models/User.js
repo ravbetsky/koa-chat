@@ -5,7 +5,7 @@ const config = require('config');
 const _ = require('lodash');
 const escape = require('escape-html');
 
-const publicFields = ['displayName', 'email'];
+const publicFields = ['displayName', 'email', 'avatar'];
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -29,6 +29,9 @@ const userSchema = new mongoose.Schema({
   verifyEmailToken: {
     type: String,
     unique: true,
+  },
+  avatar: {
+    type: String,
   },
   passwordHash: {
     type: String,

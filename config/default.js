@@ -44,6 +44,7 @@ module.exports = {
       },
     },
   },
+  kitty: 'http://placekitten.com/g/32/32',
   mailer: {
     gmail: {
       user: 'test.chat.app73',

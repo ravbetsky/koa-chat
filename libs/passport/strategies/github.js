@@ -10,9 +10,10 @@ module.exports = new GitHubStrategy({
   clientID: config.get('providers.github.appId'),
   clientSecret: config.get('providers.github.appSecret'),
   callbackURL: CALLBACK_URL,
-  profileFields: ['email'],
+  profileFields: ['email', 'photos'],
 }, function(accessToken, refreshToken, profile, done) {
   const email = profile.emails[0].value;
+  const avatar = profile.photos[0].value;
 
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
@@ -20,6 +21,7 @@ module.exports = new GitHubStrategy({
     if (!user) {
       User.create({
         email,
+        avatar,
         displayName: profile.displayName,
         providers: [{ id: 'github', profile }],
       }, async (err, user) => {

@@ -14,6 +14,7 @@ module.exports = new VKStrategy({
   profileFields: ['email'],
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
+  const avatar = profile.photos[0].value;
 
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
@@ -22,6 +23,7 @@ module.exports = new VKStrategy({
       User.create({
         email,
         displayName: profile.displayName,
+        avatar,
         providers: [{ id: 'vk', profile }],
       }, async (err, user) => {
         if (err) return done(err);

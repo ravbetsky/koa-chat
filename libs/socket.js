@@ -85,10 +85,11 @@ module.exports = (server) => {
           const currentRoom = await Room.findOne({ id: activeRoomID });
           message.room = currentRoom._id;
           await message.save();
-          const { author, content, createdAt } = message;
+          const { content, createdAt } = message;
           roomIO.to(activeRoomID).emit('message', {
             type: 'user',
             author: socket.user.displayName,
+            avatar: socket.user.avatar,
             content,
             createdAt,
           });

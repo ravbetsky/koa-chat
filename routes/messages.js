@@ -13,10 +13,19 @@ module.exports.post = async (ctx, next) => {
     const authorId = msg.author.toString();
     if (!memo.has(authorId)) {
       const author = await User.findOne(msg.author);
-      memo.set(authorId, author.toJSON().displayName);
+      const formattedAuthor = author.toJSON();
+      memo.set(authorId, {
+        author: formattedAuthor.displayName,
+        avatar: formattedAuthor.avatar,
+      });
     }
-    const author = { author: memo.get(authorId) };
-    return Object.assign({}, msg.toJSON(), author);
+    const authorData = memo.get(authorId);
+
+    return Object.assign(
+      {},
+      msg.toJSON(),
+      authorData
+    );
   };
 
   const formattedMessages = await Promise.all(messagesDB.map(formatMessage));
