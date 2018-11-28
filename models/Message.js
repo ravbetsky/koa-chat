@@ -1,11 +1,15 @@
 require('./Room');
+require('./User');
 const mongoose = require('../libs/mongoose');
 const _ = require('lodash');
 
 const publicFields = ['author', 'content', 'createdAt'];
 const messageSchema = new mongoose.Schema({
   content: String,
-  author: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
   room: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Room',

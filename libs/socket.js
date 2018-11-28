@@ -77,7 +77,7 @@ module.exports = (server) => {
     socket.on('message', async function(msg) {
       if (activeRoomID) {
         const data = {
-          author: socket.user.displayName,
+          author: socket.user._id,
           content: msg,
         };
         try {
@@ -88,7 +88,7 @@ module.exports = (server) => {
           const { author, content, createdAt } = message;
           roomIO.to(activeRoomID).emit('message', {
             type: 'user',
-            author,
+            author: socket.user.displayName,
             content,
             createdAt,
           });

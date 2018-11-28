@@ -3,6 +3,7 @@ const mongoose = require('../libs/mongoose');
 const crypto = require('crypto');
 const config = require('config');
 const _ = require('lodash');
+const escape = require('escape-html');
 
 const publicFields = ['displayName', 'email'];
 const userSchema = new mongoose.Schema({
@@ -79,7 +80,9 @@ userSchema.methods.checkPassword = function(password) {
 };
 
 userSchema.methods.toJSON = function() {
-  return _.pick(this.toObject(), publicFields);
+  const fields = _.pick(this.toObject(), publicFields);
+  fields.displayName = escape(fields.displayName);
+  return fields;
 };
 
 module.exports = mongoose.model('User', userSchema);
