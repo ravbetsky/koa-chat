@@ -48,11 +48,12 @@ module.exports = (server) => {
 
     await sessionStore.set(sid, session, null, { rolling: true });
 
-    socket.on('disconnect', async function() {
+    socket.on('disconnect', async function(roomid) {
       try {
         // Если быстро перезагружать страницу
         // то не успевают удаляться айди сокетов
         const session = await sessionStore.get(sid);
+        const redisKey = `typing_${roomid}`;
         await redisClient.srem(redisKey, socket.user.displayName);
         if (session) {
           session.socketIds.splice(session.socketIds.indexOf(socket.id), 1);
@@ -68,19 +69,32 @@ module.exports = (server) => {
 
   roomIO.on('connection', function(socket) {
     let activeRoomID;
-    socket.on('join', function(roomid) {
+    socket.on('join', async function(roomid) {
       socket.join(roomid);
       socket.emit('joined', socket.user.displayName);
-      // roomIO.to(roomid).emit('message', {
-      //   type: 'system',
-      //   content: `${socket.user.displayName} has joined to room`,
-      // });
       activeRoomID = roomid;
+      const currentUserId = socket.user._id.toString();
+      const roomMembersKey = `roomMembers_${roomid}`;
+      const currentUsers = await redisClient.smembers(roomMembersKey);
+      if (!currentUsers.includes(currentUserId)) {
+        await redisClient.sadd(roomMembersKey, currentUserId);
+        roomIO.to(roomid).emit('message', {
+          type: 'system',
+          content: `${socket.user.displayName} has joined the room`,
+        });
+      }
     });
 
-    socket.on('leave', function(roomid) {
+    socket.on('leave', async function(roomid) {
       socket.leave(roomid);
-      socket.emit('disconnect');
+      socket.emit('disconnect', roomid);
+      const currentUserId = socket.user._id.toString();
+      const roomMembersKey = `roomMembers_${roomid}`;
+      await redisClient.srem(roomMembersKey, currentUserId);
+      roomIO.to(roomid).emit('message', {
+        type: 'system',
+        content: `${socket.user.displayName} has left the room`,
+      });
     });
 
     socket.on('startTyping', async function() {

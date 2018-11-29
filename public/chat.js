@@ -106,11 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function displayUserMessage(data) {
-    const { author, content, avatar } = data;
+    const { author, content, avatar, createdAt } = data;
+    const dateCreated = new Date(createdAt).toLocaleString();
     const li = `
       <li>
         <span class='userpic'><img src='${avatar}'></span>
-        <span class='author'>${author}</span>
+        <span class='author'>${author}<small>${dateCreated}</small></span>
         <span class='content'>${content}</span>
       </li>
     `;
