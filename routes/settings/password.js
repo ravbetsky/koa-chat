@@ -3,7 +3,7 @@ const User = require('../../models/User');
 module.exports.get = async (ctx, next) => {
   const user = await User.findOne(ctx.state.user._id);
   const locals = {
-    hasPassword: user.passwordHash !== null,
+    hasPassword: typeof user.passwordHash === 'string',
   };
 
   ctx.body = ctx.render('settings.pug', Object.assign({}, ctx.locals, locals));
@@ -11,7 +11,8 @@ module.exports.get = async (ctx, next) => {
 
 module.exports.post = async (ctx, next) => {
   const user = await User.findOne(ctx.state.user._id);
-  const { passwordNew,
+  const {
+    passwordNew,
     passwordConfirmNew,
     password: currentPassword,
   } = ctx.request.body;

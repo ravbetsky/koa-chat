@@ -8,6 +8,13 @@ const socketIO = require('socket.io');
 const redis = require('socket.io-redis');
 const sessionStore = require('./sessionStore');
 
+const asyncRedis = require('async-redis');
+const redisClient = asyncRedis.createClient(config.get('redis.uri'));
+
+redisClient.on('connect', function() {
+  console.log('Redis client connected');
+});
+
 module.exports = (server) => {
   const io = socketIO(server);
 
@@ -46,6 +53,7 @@ module.exports = (server) => {
         // Если быстро перезагружать страницу
         // то не успевают удаляться айди сокетов
         const session = await sessionStore.get(sid);
+        await redisClient.srem(redisKey, socket.user.displayName);
         if (session) {
           session.socketIds.splice(session.socketIds.indexOf(socket.id), 1);
           await sessionStore.set(sid, session, null, { rolling: true });
@@ -62,6 +70,7 @@ module.exports = (server) => {
     let activeRoomID;
     socket.on('join', function(roomid) {
       socket.join(roomid);
+      socket.emit('joined', socket.user.displayName);
       // roomIO.to(roomid).emit('message', {
       //   type: 'system',
       //   content: `${socket.user.displayName} has joined to room`,
@@ -72,6 +81,30 @@ module.exports = (server) => {
     socket.on('leave', function(roomid) {
       socket.leave(roomid);
       socket.emit('disconnect');
+    });
+
+    socket.on('startTyping', async function() {
+      const redisKey = `typing_${activeRoomID}`;
+      let currentUsers = await redisClient.smembers(redisKey);
+
+      if (!currentUsers.includes(socket.user.displayName)) {
+        await redisClient.sadd(redisKey, socket.user.displayName);
+        currentUsers = currentUsers.concat(socket.user.displayName);
+      }
+
+      roomIO.to(activeRoomID).emit('typing', currentUsers);
+    });
+
+    socket.on('stopTyping', async function() {
+      const redisKey = `typing_${activeRoomID}`;
+      const currentUsers = await redisClient.smembers(redisKey);
+
+      if (currentUsers.includes(socket.user.displayName)) {
+        await redisClient.srem(redisKey, socket.user.displayName);
+        currentUsers.splice(currentUsers.indexOf(socket.user.displayName), 1);
+      }
+
+      roomIO.to(activeRoomID).emit('typing', currentUsers);
     });
 
     socket.on('message', async function(msg) {

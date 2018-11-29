@@ -28,6 +28,7 @@
     "eslint-config-google": "*"
   },
   "dependencies": {
+    "async-redis": "^1.1.4",
     "bootstrap": "^4.1.3",
     "config": "^2.0.1",
     "devbridge-autocomplete": "^1.4.9",

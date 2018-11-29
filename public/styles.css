@@ -40,12 +40,35 @@ body > .container-fluid > .row > .col-md-8 {
   display: flex;
   flex-direction: column-reverse;
   overflow-y: scroll;
-  margin-bottom: 20px;
+  margin-bottom: 0.5rem;
 }
 
 #chat + form {
-  margin-bottom: 0;
+  margin-bottom: 5px;
+  position: relative;
 }
+
+#chat + form .typing {
+  color: #a9a9a9;
+  font-size: 12px;
+  font-style: italic;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+}
+
+#chat + form .typing:after {
+  content: '';
+  animation: typing 1s infinite linear;
+}
+
+@keyframes typing {
+  0% { content: ''; }
+  30% { content: '.'; }
+  60% { content: '..'; }
+  90% { content: '...'; }
+}
+
 
 a.list-group-item.active {
   pointer-events: none;
@@ -53,7 +76,8 @@ a.list-group-item.active {
 
 ul.chat-list {
   padding-left: 0;
-  list-style: none
+  list-style: none;
+  margin: 0;
 }
 ul.chat-list li {
   margin-bottom: 12px;

@@ -1,6 +1,12 @@
 const Room = require('../models/Room');
 const _ = require('lodash');
 const generate = require('nanoid/generate');
+const config = require('config');
+
+const Redis = require('koa-simple-redis');
+const redisClient = new Redis({
+  url: config.get('redis.uri'),
+});
 
 module.exports.get = async (ctx, next) => {
   if (ctx.isAuthenticated()) {
@@ -24,6 +30,7 @@ module.exports.post = async (ctx, next) => {
       });
       ctx.state.user.rooms.push(room);
       await ctx.state.user.save();
+      await redisClient.set(`typing_${roomId}`, []);
       ctx.flash('success', `Комната  ${room.name} создана`);
       ctx.redirect(`/room/${roomId}`);
     } catch (e) {
