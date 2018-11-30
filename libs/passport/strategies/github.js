@@ -13,7 +13,9 @@ module.exports = new GitHubStrategy({
   profileFields: ['email', 'photos'],
 }, function(accessToken, refreshToken, profile, done) {
   const email = profile.emails[0].value;
-  const avatar = profile.photos[0].value;
+  const avatar = profile.photos
+    ? profile.photos[0].value
+    : config.get('kitty');
 
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);

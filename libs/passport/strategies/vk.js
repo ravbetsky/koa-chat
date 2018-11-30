@@ -14,7 +14,9 @@ module.exports = new VKStrategy({
   profileFields: ['email'],
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
-  const avatar = profile.photos[0].value;
+  const avatar = profile.photos
+    ? profile.photos[0].value
+    : config.get('kitty');
 
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
