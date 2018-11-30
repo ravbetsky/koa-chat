@@ -35,7 +35,7 @@ const config = {
       appId: 'd8b94a137cbce06a1f99',
       appSecret: '3ceb26bf022ee962f710292b8f4290b2245b4a0d',
       passportOptions: {
-        scope: ['email'],
+        scope: ['emails'],
       },
     },
     vk: {

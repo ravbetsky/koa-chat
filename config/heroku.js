@@ -15,7 +15,7 @@ module.exports = {
       appId: '437e2def5431e00c083a',
       appSecret: '31d6f73dc927abfda8e1787a055f392d786a1c1b',
       passportOptions: {
-        scope: ['email', 'photos'],
+        scope: ['emails', 'photos'],
       },
     },
     vk: {
