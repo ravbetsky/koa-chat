@@ -11,7 +11,7 @@ module.exports = new VKStrategy({
   clientSecret: config.get('providers.vk.appSecret'),
   callbackURL: CALLBACK_URL,
   scope: ['email'],
-  profileFields: ['email'],
+  profileFields: ['email', 'displayName'],
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
   const avatar = profile.photos
