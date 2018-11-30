@@ -11,7 +11,7 @@ module.exports = new GitHubStrategy({
   clientSecret: config.get('providers.github.appSecret'),
   callbackURL: CALLBACK_URL,
   scope: 'user:email',
-  profileFields: ['emails', 'photos'],
+  profileFields: ['emails', 'photos', 'displayName'],
 }, function(accessToken, refreshToken, profile, done) {
   const email = profile.emails[0].value;
   const avatar = profile.photos

@@ -11,7 +11,7 @@ module.exports = new VKStrategy({
   clientSecret: config.get('providers.vk.appSecret'),
   callbackURL: CALLBACK_URL,
   scope: ['email'],
-  profileFields: ['email', 'photo_50'],
+  profileFields: ['email', 'photo_50', 'displayName'],
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
   const avatar = profile.photo_50 || config.get('kitty');
@@ -22,7 +22,7 @@ module.exports = new VKStrategy({
     if (!user) {
       User.create({
         email,
-        displayName: profile.first_name + ' ' + profile.last_name,
+        displayName: profile.displayName,
         avatar,
         providers: [{ id: 'vk', profile }],
       }, async (err, user) => {
