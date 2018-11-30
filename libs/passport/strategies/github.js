@@ -3,7 +3,7 @@ const config = require('config');
 const uuid4 = require('uuid4');
 const Room = require('../../../models/Room');
 const User = require('../../../models/User');
-
+const generate = require('nanoid/generate');
 
 const URI = `${config.get('app.uri')}`;
 const CALLBACK_URL = `${URI}/auth/github`;
@@ -27,7 +27,7 @@ module.exports = new GitHubStrategy({
       User.create({
         email,
         avatar,
-        displayName: profile.displayName,
+        displayName: profile.displayName || `user${generate('12134567890', 6)}`,
         verifiedEmail: false,
         verifyEmailToken: uuid4(),
         providers: [{ id: 'github', profile }],

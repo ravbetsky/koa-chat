@@ -25,7 +25,7 @@ module.exports = new VKStrategy({
     if (!user) {
       User.create({
         email,
-        displayName: profile.displayName,
+        displayName: profile.displayName || `user${generate('12134567890', 6)}`,
         avatar,
         verifiedEmail: false,
         verifyEmailToken: uuid4(),
