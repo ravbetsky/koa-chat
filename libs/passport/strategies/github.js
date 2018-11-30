@@ -1,7 +1,9 @@
 const GitHubStrategy = require('passport-github').Strategy;
 const config = require('config');
+const uuid4 = require('uuid4');
 const Room = require('../../../models/Room');
 const User = require('../../../models/User');
+
 
 const URI = `${config.get('app.uri')}`;
 const CALLBACK_URL = `${URI}/auth/github`;
@@ -18,7 +20,6 @@ module.exports = new GitHubStrategy({
     ? profile.photos[0].value
     : config.get('kitty');
 
-  console.log(profile);
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
 
@@ -26,7 +27,9 @@ module.exports = new GitHubStrategy({
       User.create({
         email,
         avatar,
-        displayName: profile.displayName,
+        displayName: profile.name,
+        verifiedEmail: false,
+        verifyEmailToken: uuid4(),
         providers: [{ id: 'github', profile }],
       }, async (err, user) => {
         if (err) return done(err);

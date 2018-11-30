@@ -1,5 +1,6 @@
 const VKStrategy = require('passport-vkontakte').Strategy;
 const config = require('config');
+const uuid4 = require('uuid4');
 const User = require('../../../models/User');
 const Room = require('../../../models/Room');
 
@@ -15,7 +16,7 @@ module.exports = new VKStrategy({
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
   const avatar = profile.photo_50 || config.get('kitty');
-  console.log(profile);
+
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
 
@@ -24,6 +25,8 @@ module.exports = new VKStrategy({
         email,
         displayName: profile.displayName,
         avatar,
+        verifiedEmail: false,
+        verifyEmailToken: uuid4(),
         providers: [{ id: 'vk', profile }],
       }, async (err, user) => {
         if (err) return done(err);
