@@ -18,6 +18,7 @@ module.exports = new GitHubStrategy({
     ? profile.photos[0].value
     : config.get('kitty');
 
+  console.log(profile);
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
 

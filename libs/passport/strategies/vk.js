@@ -15,7 +15,7 @@ module.exports = new VKStrategy({
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
   const avatar = profile.photo_50 || config.get('kitty');
-
+  console.log(profile);
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
 
