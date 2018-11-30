@@ -6,7 +6,7 @@ module.exports.get = async (ctx) => {
   });
 
   if (!user) {
-    ctx.throw(404, 'Ссылка недействительна');
+    ctx.throw(404, 'Invalid link');
   }
 
   if (!user.verifiedEmail) {

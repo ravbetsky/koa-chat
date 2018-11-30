@@ -3,7 +3,7 @@ const config = require('config');
 const Room = require('../../../models/Room');
 const User = require('../../../models/User');
 
-const URI = `${config.get('app.host')}:${config.get('app.port')}`;
+const URI = `${config.get('app.uri')}`;
 const CALLBACK_URL = `${URI}/auth/github`;
 
 module.exports = new GitHubStrategy({
@@ -29,17 +29,17 @@ module.exports = new GitHubStrategy({
         const generalRoom = await Room.findOne({ name: 'general' });
         user.rooms.push(generalRoom._id);
         await user.save();
-        done(null, user, { message: 'Добро пожаловать!' });
+        done(null, user, { message: `Welcome ${user.displayName}!` });
       });
     } else {
       if (user.providers.find((provider) => provider.id === 'github')) {
-        done(null, user, { message: 'Добро пожаловать!' });
+        done(null, user, { message: `Welcome ${user.displayName}!` });
       } else {
         user.providers.push({ id: 'github', profile });
         user.save((err) => {
           if (err) return done(err);
 
-          done(null, user, { message: 'Добро пожаловать!' });
+          done(null, user, { message: `Welcome ${user.displayName}!` });
         });
       }
     }

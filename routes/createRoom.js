@@ -6,7 +6,7 @@ module.exports.get = async (ctx, next) => {
   if (ctx.isAuthenticated()) {
     ctx.body = ctx.render('createRoom.pug');
   } else {
-    ctx.flash('error', 'Пожалуйста войдите или зарегистрируйсесь');
+    ctx.flash('error', 'Please sign up or sign in');
     ctx.body = ctx.render('login.pug');
   }
 };
@@ -24,7 +24,7 @@ module.exports.post = async (ctx, next) => {
       });
       ctx.state.user.rooms.push(room);
       await ctx.state.user.save();
-      ctx.flash('success', `Комната  ${room.name} создана`);
+      ctx.flash('success', `Room ${room.name} created`);
       ctx.redirect(`/room/${roomId}`);
     } catch (e) {
       if (e.name === 'ValidationError') {
@@ -39,7 +39,7 @@ module.exports.post = async (ctx, next) => {
       }
     }
   } else {
-    ctx.flash('error', 'Пожалуйста войдите или зарегистрируйсесь');
+    ctx.flash('error', 'Please sign up or sign in');
     ctx.body = ctx.render('login.pug');
   }
 };

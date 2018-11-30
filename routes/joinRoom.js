@@ -6,7 +6,7 @@ module.exports.get = async (ctx, next) => {
     const room = await Room.findOne({ id: roomId });
     const roomObjectId = room._id;
     await ctx.state.user.update({ '$push': { rooms: roomObjectId } });
-    ctx.flash('success', 'Вы вошли комнату');
+    ctx.flash('success', 'You have been successfully joined the room');
     ctx.redirect(`/room/${roomId}`);
   } catch (e) {
     console.log(e);

@@ -40,7 +40,7 @@ module.exports.get = async (ctx, next) => {
       }));
     }
   } else {
-    ctx.flash('error', 'Пожалуйста войдите или зарегистрируйсесь');
-    ctx.body = ctx.render('login.pug');
+    ctx.flash('error', 'Please sign up or sign in');
+    ctx.redirect('/');
   }
 };

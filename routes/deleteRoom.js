@@ -19,13 +19,13 @@ module.exports.get = async (ctx, next) => {
         return user.update({ '$pull': { rooms: { $in: roomObjectId } } });
       }));
       await room.remove();
-      ctx.flash('success', 'Комната удалена');
+      ctx.flash('success', 'Room deleted');
       ctx.redirect('/');
     } catch (e) {
       console.log(e);
     }
   } else {
-    ctx.flash('error', 'Вы не являетесь администратором комнаты');
+    ctx.flash('error', 'You dont have permission to delete this room');
     ctx.redirect('/');
   }
 };

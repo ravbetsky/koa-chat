@@ -3,7 +3,7 @@ const config = require('config');
 const User = require('../../../models/User');
 const Room = require('../../../models/Room');
 
-const URI = `${config.get('app.host')}:${config.get('app.port')}`;
+const URI = `${config.get('app.uri')}`;
 const CALLBACK_URL = `${URI}/oauth/vk`;
 
 module.exports = new VKStrategy({
@@ -30,17 +30,17 @@ module.exports = new VKStrategy({
         const generalRoom = await Room.findOne({ name: 'general' });
         user.rooms.push(generalRoom._id);
         await user.save();
-        done(null, user, { message: 'Добро пожаловать!' });
+        done(null, user, { message: `Welcome ${user.displayName}!` });
       });
     } else {
       if (user.providers.find((provider) => provider.id === 'vk')) {
-        done(null, user, { message: 'Добро пожаловать!' });
+        done(null, user, { message: `Welcome ${user.displayName}!` });
       } else {
         user.providers.push({ id: 'vk', profile });
         user.save((err) => {
           if (err) return done(err);
 
-          done(null, user, { message: 'Добро пожаловать!' });
+          done(null, user, { message: `Welcome ${user.displayName}!` });
         });
       }
     }

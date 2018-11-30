@@ -2,8 +2,8 @@ const LocalStrategy = require('passport-local');
 const User = require('../../../models/User');
 
 const messages = {
-  'not-found': 'Нет такого пользователя или пароль неверен.',
-  'welcome': 'Добро пожаловать',
+  'not-found': 'No such user or wrong password',
+  'welcome': 'Welcome!',
 };
 
 module.exports = new LocalStrategy(
