@@ -12,10 +12,12 @@ module.exports = new VKStrategy({
   clientSecret: config.get('providers.vk.appSecret'),
   callbackURL: CALLBACK_URL,
   scope: ['email'],
-  profileFields: ['email', 'photo_50', 'displayName'],
+  profileFields: ['email', 'photos', 'displayName'],
 }, function(accessToken, refreshToken, params, profile, done) {
   const email = params.email;
-  const avatar = profile.photo_50 || config.get('kitty');
+  const avatar = profile.photos
+    ? profile.photos[0].value
+    : config.get('kitty');
 
   User.findOne({ email }, (err, user) => {
     if (err) return done(err);
