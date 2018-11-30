@@ -27,7 +27,7 @@ module.exports = new GitHubStrategy({
       User.create({
         email,
         avatar,
-        displayName: profile.name,
+        displayName: profile.displayName,
         verifiedEmail: false,
         verifyEmailToken: uuid4(),
         providers: [{ id: 'github', profile }],
