@@ -32,6 +32,7 @@ module.exports.post = async (ctx) => {
     const user = await User.create({
       email,
       displayName,
+      avatar: config.get('kitty'),
       password,
       verifiedEmail: false,
       verifyEmailToken,

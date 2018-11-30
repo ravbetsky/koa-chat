@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  div(class="jumbotron login")
+    h1 Join room
+    p You're not a memberer of this room, click join button to join this room
+
+    a(href=`/joinRoom/${roomId}` class="btn btn-outline-primary") Join

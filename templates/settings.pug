@@ -1,0 +1,27 @@
+extends layout
+
+block content
+
+  div(class='row')
+    div(class='col-lg-3 col-md-4 col-xs-12 col-xl-2')
+      div(class='panel')
+        h3 Settings
+        ul.list-group
+          - var items = {profile: "Profile", password: "Password"}
+          each val, key in items
+            - var initialClassName = `list-group-item list-group-item-action`;
+            if key == settingsLink
+              - var activeClassName = 'active';
+            else
+              - var activeClassName = '';
+
+            a(class=`${initialClassName} ${activeClassName}` href=`/settings/${key}`)= val
+
+    div(class='col-lg-9 col-md-8 col-xs-12 col-xl-10')
+      div(class='row')
+        div(class='col-lg-5 col-md-7 col-xs-12 col-xl-4')
+          if settingsLink == 'profile'
+            include settings/profile
+          if settingsLink == 'password'
+            include settings/password
+

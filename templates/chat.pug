@@ -1,9 +1,26 @@
-span(data-status)
+.room-settings
+  - var userIcon = "<i class='fa fa-user-o'></i>"
+  - var membersCount = roomUsers.length;
+  span.channel-name !{activeRoomName}
+  span.members
+    a(href="#" data-toggle='modal' data-target='#roomUsers') !{userIcon} !{membersCount}
+  unless isGeneral
+    span.divider |
+    span.settings
+      - var settingsIcon = "<i class='fa fa-cog'></i>"
+      .btn-group
+        a(href="#" data-toggle='dropdown' aria-haspopup='true' aria-expanded='false') !{settingsIcon}
+        .dropdown-menu
+          if isCurrentRoomAdmin
+            - var deleteLink = '/deleteRoom/' + activeRoomId
+            a.dropdown-item.text-danger(href=deleteLink) Delete room
+          else
+            - var leaveLink = '/leaveRoom/' + activeRoomId
+            a#leaveLink.dropdown-item(href=leaveLink) Leave room
+
+    
 #chat
   ul.chat-list
-    //- li
-    //-   span.author Artem
-    //-   span.content Hello, world!
 
 form(id="send" action="/sendMessage" method="post")
   .form-group

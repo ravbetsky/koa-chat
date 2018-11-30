@@ -40,23 +40,92 @@ body > .container-fluid > .row > .col-md-8 {
   display: flex;
   flex-direction: column-reverse;
   overflow-y: scroll;
-  margin-bottom: 20px;
+  margin-bottom: 0.5rem;
 }
 
 #chat + form {
-  margin-bottom: 0;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+#chat + form .typing {
+  color: #a9a9a9;
+  font-size: 12px;
+  font-style: italic;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+}
+
+#chat + form .typing:after {
+  content: '';
+  animation: typing 1s infinite linear;
+}
+
+@keyframes typing {
+  0% { content: ''; }
+  30% { content: '.'; }
+  60% { content: '..'; }
+  90% { content: '...'; }
+}
+
+.room-settings .channel-name {
+  color: #495057;
+  margin-right: 10px;  
+}
+
+.room-settings .divider {
+  color: #d7dce1;
+  margin: 0 8px;
+}
+
+.room-settings a {
+  text-decoration: none;
+}
+
+.room-settings .settings {
+  position: relative;
+  top: -2px;
+}
+
+a.list-group-item.active {
+  pointer-events: none;
 }
 
 ul.chat-list {
   padding-left: 0;
-  list-style: none
+  list-style: none;
+  margin: 0;
 }
 ul.chat-list li {
-  margin-bottom: 5px;
+  margin-bottom: 12px;
+  padding-left: 50px;
+  position: relative;
+}
+ul.chat-list li span.userpic {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  left: 0;
+  top: 5px;
+  background: lightgray;
+}
+ul.chat-list li span.userpic img {
+  width: 100%;
 }
 ul.chat-list li span.author {
   font-weight: bold;
   display: block
+}
+
+ul.chat-list li span.author small {
+  margin-left: 5px;
+  color: lightgray;
+}
+
+ul.chat-list li span.system {
+  color: #b9b9b9;
+  font-style: italic;
 }
 
 .start-messaging {
@@ -68,4 +137,53 @@ ul.chat-list li span.author {
   margin: auto;
   height: 24px;
   text-align: center;
+}
+
+#roomUsers span.admin {
+  float: right;
+  color: gray;
+}
+
+#roomUsers ul {
+  list-style: none;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+#roomUsers li {
+  clear: right;
+  padding: 5px 0 7px;
+  margin-bottom: 0;
+}
+
+.panel {
+  margin-bottom: 20px;
+}
+
+.room-settings {
+  padding-bottom: 5px;
+}
+
+.autocomplete-suggestions {
+  background-color: #fff;
+  border-color: #d7dce1;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  transform: translateY(-2px);
+  box-shadow: 0px 12px 20px rgba(0,0,0,0.2);
+}
+
+.autocomplete-suggestion {
+  padding: 4px 7px;
+  cursor: pointer;
+}
+
+.autocomplete-suggestion:hover {
+  background-color: #f0f8ff;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/fonts/glyphicons-halflings-regular.eot');
+  src: url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/fonts/glyphicons-halflings-regular.woff') format('woff'), url('/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
