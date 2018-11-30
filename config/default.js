@@ -1,6 +1,7 @@
 const path = require('path');
 
-module.exports = {
+const PORT = process.env.PORT || 3000;
+const config = {
   secret: 'mysecret',
   root: process.cwd(),
   templatesRoot: path.join(process.cwd(), 'templates'),
@@ -15,8 +16,9 @@ module.exports = {
     uri: 'redis://127.0.0.1:6379',
   },
   app: {
-    port: process.env.PORT || 3000,
-    host: 'http://localhost',
+    port: PORT,
+    host: 'http:/localhost',
+    uri: `http:/localhost:${PORT}`,
   },
   mongodb: {
     uri: 'mongodb://localhost/chat_app',
@@ -60,3 +62,5 @@ module.exports = {
     },
   },
 };
+
+module.exports = config;

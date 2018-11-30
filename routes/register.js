@@ -53,7 +53,8 @@ module.exports.post = async (ctx) => {
     }
   }
 
-  const host = `${config.get('app.host')}:${config.get('app.port')}`;
+  const defaultHost = `${config.get('app.host')}:${config.get('app.port')}`;
+  const host = config.get('app.uri') || defaultHost;
 
   await sendMail({
     template: 'verify-registration-email',
