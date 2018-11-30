@@ -27,6 +27,7 @@ module.exports.get = async (ctx, next) => {
       const roomUsers = await getRoomUsers(currentRoom._id);
       ctx.body = ctx.render('dashboard.pug', Object.assign({}, locals, {
         activeRoomId: roomId,
+        activeRoomName: currentRoom.name,
         isCurrentRoomAdmin,
         isGeneral: typeof isCurrentRoomAdmin !== 'boolean',
         roomUsers: roomUsers.map((user) => user.toJSON()),

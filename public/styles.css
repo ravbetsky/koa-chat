@@ -69,6 +69,24 @@ body > .container-fluid > .row > .col-md-8 {
   90% { content: '...'; }
 }
 
+.room-settings .channel-name {
+  color: #495057;
+  margin-right: 10px;  
+}
+
+.room-settings .divider {
+  color: #d7dce1;
+  margin: 0 8px;
+}
+
+.room-settings a {
+  text-decoration: none;
+}
+
+.room-settings .settings {
+  position: relative;
+  top: -2px;
+}
 
 a.list-group-item.active {
   pointer-events: none;
@@ -140,6 +158,28 @@ ul.chat-list li span.system {
 
 .panel {
   margin-bottom: 20px;
+}
+
+.room-settings {
+  padding-bottom: 5px;
+}
+
+.autocomplete-suggestions {
+  background-color: #fff;
+  border-color: #d7dce1;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  transform: translateY(-2px);
+  box-shadow: 0px 12px 20px rgba(0,0,0,0.2);
+}
+
+.autocomplete-suggestion {
+  padding: 4px 7px;
+  cursor: pointer;
+}
+
+.autocomplete-suggestion:hover {
+  background-color: #f0f8ff;
 }
 
 @font-face {

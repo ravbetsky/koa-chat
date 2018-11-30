@@ -6,21 +6,25 @@ $('#searchRooms').autocomplete({
 });
 
 function fetchSuggestions(query, done) {
-  fetch('/searchRooms', {
-    method: 'post',
-    body: JSON.stringify({
-      query: $('#searchRooms').val(),
-    }),
-    headers: { 'Content-type': 'application/json' },
-  }).then((response) => {
-    return response.json();
-  }).then((response) => {
-    const result = {
-      suggestions: response.map((data) => {
-        return { value: data.name, data: Object.assign({}, data) };
+  if (query.length > 0) {
+    fetch('/searchRooms', {
+      method: 'post',
+      body: JSON.stringify({
+        query: $('#searchRooms').val(),
       }),
-    };
+      headers: { 'Content-type': 'application/json' },
+    }).then((response) => {
+      return response.json();
+    }).then((response) => {
+      const result = {
+        suggestions: response.map((data) => {
+          return { value: data.name, data: Object.assign({}, data) };
+        }),
+      };
 
-    done(result);
-  });
+      done(result);
+    });
+  } else {
+    done();
+  }
 };
