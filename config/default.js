@@ -17,8 +17,8 @@ const config = {
   },
   app: {
     port: PORT,
-    host: 'http:/localhost',
-    uri: `http:/localhost:${PORT}`,
+    host: 'http://localhost',
+    uri: `http://localhost:${PORT}`,
   },
   mongodb: {
     uri: 'mongodb://localhost/chat_app',
