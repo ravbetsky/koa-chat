@@ -56,12 +56,16 @@ module.exports.post = async (ctx) => {
   const defaultHost = `${config.get('app.host')}:${config.get('app.port')}`;
   const host = config.get('app.uri') || defaultHost;
 
-  await sendMail({
-    template: 'verify-registration-email',
-    to: email,
-    subject: 'Подтверждение email',
-    link: `${host}/confirm/${verifyEmailToken}`,
-  });
+  try {
+    await sendMail({
+      template: 'verify-registration-email',
+      to: email,
+      subject: 'Подтверждение email',
+      link: `${host}/confirm/${verifyEmailToken}`,
+    });  
+  } catch (e) {
+    console.log(e);
+  }
 
   ctx.body = ctx.render('registered.pug');
 };
