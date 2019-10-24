@@ -62,7 +62,7 @@ module.exports.post = async (ctx) => {
       to: email,
       subject: 'Подтверждение email',
       link: `${host}/confirm/${verifyEmailToken}`,
-    });  
+    });
   } catch (e) {
     console.log(e);
   }
