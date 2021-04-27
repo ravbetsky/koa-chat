@@ -60,7 +60,7 @@
     "passport-vkontakte": "^0.3.2",
     "popper.js": "^1.14.4",
     "pug": "^2.0.3",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "socket.io": "^2.1.1",
